@@ -211,7 +211,7 @@ func resolveTarget() error {
 	}
 
 	fmt.Printf("[*] Target host '%s' resolved to: %v\n", targetHost, addrs)
-	fullTargetAddr = net.JoinHostPort(targetHost, targetPort)
+	fullTargetAddr = net.JoinHostPort(addrs[0].String(), targetPort)
 	return nil
 }
 
