@@ -254,8 +254,8 @@ func promptForInput() {
 
 func main() {
 	flag.StringVar(&localPort, "lp", "", "Local port the proxy will listen on (e.g., 7777)")
-	flag.StringVar(&targetHost, "th", "", "Target IP or hostname (e.g., 1234:5678::ef2 or myhost.ddns.net)")
-	flag.StringVar(&targetPort, "ta", "", "Target port (e.g., 7777)")
+	flag.StringVar(&targetHost, "ta", "", "Target IP or hostname (e.g., 1234:5678::ef2 or myhost.ddns.net)")
+	flag.StringVar(&targetPort, "tp", "", "Target port (e.g., 7777)")
 	flag.BoolVar(&onlyV6Target, "6", false, "Use only IPv6 for target (when using hostname)")
 	flag.StringVar(&listenAddr, "la", "127.0.0.1", "Local IP address to bind to (e.g., 0.0.0.0 for all interfaces)")
 	flag.BoolVar(&enableTCP, "tcp", false, "Enable the TCP proxy listener")
