@@ -200,7 +200,12 @@ func resolveTarget() error {
 
 	targetHost = strings.Trim(targetHost, "[]")
 
-	addrs, err := net.DefaultResolver.LookupNetIP(context.Background(), "ip6", targetHost)
+	network := "ip"
+	if onlyV6Target {
+		network = "ip6"
+	}
+
+	addrs, err := net.DefaultResolver.LookupNetIP(context.Background(), network, targetHost)
 	if err != nil {
 		return fmt.Errorf("failed to resolve target host '%s': %v", targetHost, err)
 	}
