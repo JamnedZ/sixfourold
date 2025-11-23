@@ -255,11 +255,20 @@ func promptForInput() {
 func main() {
 	flag.StringVar(&localPort, "lp", "", "Local port the proxy will listen on (e.g., 7777)")
 	flag.StringVar(&targetHost, "th", "", "Target IP or hostname (e.g., 1234:5678::ef2 or myhost.ddns.net)")
-	flag.StringVar(&targetPort, "tp", "", "Target port (e.g., 7777)")
+	flag.StringVar(&targetPort, "ta", "", "Target port (e.g., 7777)")
 	flag.BoolVar(&onlyV6Target, "6", false, "Use only IPv6 for target (when using hostname)")
 	flag.StringVar(&listenAddr, "la", "127.0.0.1", "Local IP address to bind to (e.g., 0.0.0.0 for all interfaces)")
 	flag.BoolVar(&enableTCP, "tcp", false, "Enable the TCP proxy listener")
 	flag.BoolVar(&enableUDP, "udp", false, "Enable the UDP proxy listener")
+	flag.Usage = func() {
+		fmt.Printf("sixfourold: a tcp/udp proxy\n\n")
+		fmt.Printf("Usage:\n\n$ sixfourold\n- interactive mode\n\n")
+		fmt.Printf("$ sixfourold -lp 10800 -ta 1234:2345:5f3::2 -tp 10800 -tcp -udp\n")
+		fmt.Printf("- proxy tcp and udp traffic from localhost:10800 (127.0.0.1:10800) to [1234:2345:5f3::2]:10800\n\n")
+		fmt.Printf("$ sixfourold -lp 25565 -ta smth.dynv6.com -tp 11037 -tcp -6\n")
+		fmt.Printf("- proxy tcp traffic from localhost:25565 to smth.dynv6.com:11037, explicitly to IPv6\n\n")
+		flag.PrintDefaults()
+	}
 	flag.Parse()
 
 	if (localPort == "" || targetHost == "" || targetPort == "") || (!enableTCP && !enableUDP) {
